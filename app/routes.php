@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'QuestionsController@index');
+
+Route::controller('questions', 'QuestionsController');
+Route::controller('answers', 'AnswersController');
