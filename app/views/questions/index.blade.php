@@ -15,4 +15,5 @@
     @else
         <p>No questions found. Create one now!</p>
     @endif
+    {{ $questions->links(); }}
 @stop

@@ -33,10 +33,15 @@
 
         <div class='write-answer'>
             <h3>Your answer</h3>
-            {{ Form::open(array('url' => URL::to('answers/add', array($question->id)))) }}
-                {{ Form::textarea('answer') }}
-                {{ Form::submit('Save') }}
-            {{ Form::close() }}
+            @if (Auth::check())
+                {{ Form::open(array('url' => URL::to('answers/add', array($question->id)))) }}
+                    {{ Form::textarea('answer') }}
+                    {{ Form::submit('Save') }}
+                {{ Form::close() }}
+            @else
+                <h4>You must login to post an answer to this question.</h4>
+                <p>{{ HTML::link('users/login', 'Login', array('class' => 'btn')) }}</p>
+            @endif
         </div>
     </div>
 @stop
