@@ -5,8 +5,6 @@
  * @author David Yell <neon1024@gmail.com>
  */
 
-use Carbon\Carbon;
-
 class QuestionsController extends BaseController {
 
     /**
@@ -39,7 +37,9 @@ class QuestionsController extends BaseController {
     }
 
     public function getAdd() {
-        return View::make('questions/add');
+        $tags = Tag::all(array('id', 'name'));
+        $tag = Tag;
+        return View::make('questions/add')->with('tags', $tags)->with('tag', $tag);
     }
 
     public function postAdd() {

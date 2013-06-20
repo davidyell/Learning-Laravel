@@ -8,7 +8,10 @@
 
         {{ Form::label('question') }}
         {{ Form::textarea('question') }}
-        
+
+        {{ Form::model($tag, array('route' => array('tag.name', $tag->id))) }}
+
+        <div class='clearfix'><!-- blank --></div>
         {{ Form::submit('Save') }}
     {{ Form::close() }}
 @stop

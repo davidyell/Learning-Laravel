@@ -12,7 +12,7 @@ class UsersController extends BaseController {
 
     public function postLogin() {
         if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')))) {
-            return Redirect::intended();
+            return Redirect::intended('/');
         } else {
             return Redirect::to('users/login')
                     ->with('message', 'Email or password incorrect')
@@ -31,3 +31,4 @@ class UsersController extends BaseController {
     }
 
 }
+;
