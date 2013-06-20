@@ -35,7 +35,13 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) {
+        if (Request::isXmlHttpRequest()) {
+            return 'Please login to vote';
+        } else {
+            return Redirect::guest('users/login')->with('message', 'You must login to access that');
+        }
+    }
 });
 
 
