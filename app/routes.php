@@ -11,7 +11,25 @@
 |
 */
 
-Route::get('/', 'QuestionsController@index');
+/**
+ * Routes which require a login will be passed through the 'auth' routing filter
+ */
+Route::group(array('before' => 'auth'), function() {
+    Route::get('questions/add', function() {});
+    Route::get('answers/add', function() {});
+    Route::get('questions/vote/{id}/{type}', function($id, $type) {})->where('id', '[0-9]+')->where('type', '(down|up)');
+    Route::get('answers/vote/{id}/{type}', function($id, $type) {})->where('id', '[0-9]+')->where('type', '(down|up)');
+});
 
+/**
+ * Other controllers are routed using REST, to the correct method pre-fixed with
+ * the matching HTTP verb
+ */
 Route::controller('questions', 'QuestionsController');
 Route::controller('answers', 'AnswersController');
+Route::controller('users', 'UsersController');
+
+/**
+ * Homepage
+ */
+Route::get('/', 'QuestionsController@getIndex');
