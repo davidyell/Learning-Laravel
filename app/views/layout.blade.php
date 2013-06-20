@@ -24,8 +24,22 @@
                     <div class='navbar'>
                         <div class='navbar-inner'>
                             <ul class='nav'>
-                                <li>{{ HTML::link('questions/index', 'Home') }}</li>
+                                <li>{{ HTML::link('/', 'Home') }}</li>
                                 <li>{{ HTML::link('questions/add', 'New question') }}</li>
+                                
+                                @if (Auth::check())
+                                    <li class='dropdown'>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            Account <b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>{{ HTML::link('users/view/' . Auth::user()->id, 'Profile') }}</li>
+                                            <li>{{ HTML::link('users/logout', 'Logout ' . Auth::user()->name) }}</li>
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li class='pull-right'>{{ HTML::link('users/login', 'Login') }}</li>
+                                @endif
                             </ul>
                         </div>
                     </div>
