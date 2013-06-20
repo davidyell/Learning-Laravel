@@ -12,7 +12,11 @@ $(function() {
         $.ajax({
             url: url + $(this).data('id') + '/' + $(this).data('vote'),
             success: function (data, status) {
-                $(element).siblings('span.num').html(data);
+                if (isNaN(data)) {
+                    alert(data);
+                } else {
+                    $(element).siblings('span.num').html(data);
+                }
             }
         });
     });
