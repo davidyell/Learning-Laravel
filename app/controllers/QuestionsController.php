@@ -15,7 +15,7 @@ class QuestionsController extends BaseController {
      * @return View
      */
     public function getIndex() {
-        $questions = Question::orderBy('created_at', 'desc')->get();
+        $questions = Question::orderBy('created_at', 'desc')->paginate(5);
 
         return View::make('questions/index')->with('questions', $questions);
     }
@@ -46,7 +46,7 @@ class QuestionsController extends BaseController {
         $question = new Question();
         $question->title = Input::get('title');
         $question->question = Input::get('question');
-        $question->user_id = 1;
+        $question->user_id = Auth::user()->id;
 
         if ($question->save()) {
             return Redirect::to("questions/view/{$question->id}")->with('success', 'Your question has been added');

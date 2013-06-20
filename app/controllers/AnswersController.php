@@ -10,7 +10,7 @@ class AnswersController extends BaseController {
         $answer = new Answer();
         $answer->question_id = $questionId;
         $answer->answer = Input::get('answer');
-        $answer->user_id = 2;
+        $answer->user_id = Auth::user()->id;
 
         if ($answer->save()) {
             return Redirect::to('questions/view/' . $questionId)->with('success', 'Your answer was added.');
